@@ -18,10 +18,10 @@ public class ManejadorUsuario extends Thread {
 	}
 	
 	@Override
-	public void start() {
+	public void run() {
 		try {
 			ObjectInputStream entrada =
-					new ObjectInputStream(usuario.getInputStream());
+				new ObjectInputStream(usuario.getInputStream());
 			while (usuario.isConnected()) {
 				try {
 					Mensaje nuevoMensaje = (Mensaje)entrada.readObject();
@@ -41,8 +41,8 @@ public class ManejadorUsuario extends Thread {
 		} finally {
 			System.out.println("Cerrando manejador");
 			try {
-				usuario.close();
 				server.deregistrarManejador(this);
+				usuario.close();
 			} catch (IOException e) {
 				e.printStackTrace();
 			}

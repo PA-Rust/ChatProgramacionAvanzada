@@ -25,6 +25,7 @@ public class Servidor {
 				manejadores.add(nuevoManejador);
 				System.out.println("nuevo cliente!");
 				nuevoManejador.start();
+				// nuevoMensaje(null, new Mensaje("Servidor", "NUEVO USUARIO CONECTADO"));
 			}
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -32,6 +33,9 @@ public class Servidor {
 	}
 	
 	public void nuevoMensaje(ManejadorUsuario sender, Mensaje mensaje) {
+		if (manejadores.isEmpty()) {
+			return;
+		}
 		System.out.println(mensaje.getNombre() + ": " + mensaje.getMensaje());
 		for (ManejadorUsuario manejador: manejadores) {
 			if (manejador == sender) {

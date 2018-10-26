@@ -19,7 +19,7 @@ public class ClienteMain {
 class FrameLogueo extends JFrame {
 	private static final long serialVersionUID = -5757130380734060552L;
 	private LabelLogueo panel;
-	FrameLogueo(){
+	FrameLogueo() {
 		setBounds(100, 100, 250, 250);
 		setTitle("Logueo");
 		panel = new LabelLogueo(this);

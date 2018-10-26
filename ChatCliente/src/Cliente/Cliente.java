@@ -31,8 +31,9 @@ public class Cliente extends Thread {
 		}
 	}
 	
-	public void start() {
+	public void run() {
 		try {
+			System.out.println("running thread");
 			entrada = new ObjectInputStream(server.getInputStream());
 			while (connected) {
 				try {
@@ -48,10 +49,11 @@ public class Cliente extends Thread {
 			return;
 		} catch (IOException e) {
 			e.printStackTrace();
-			System.out.println("Error reading info from client");
+			System.out.println("Error reading info from server");
 		} finally {
 			System.out.println("Cerrando receptor");
 			try {
+				mensaje.close();
 				server.close();
 			} catch (IOException e) {
 				e.printStackTrace();
@@ -66,6 +68,7 @@ public class Cliente extends Thread {
 		try {
 			mensaje.close();
 			entrada.close();
+			server.close();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

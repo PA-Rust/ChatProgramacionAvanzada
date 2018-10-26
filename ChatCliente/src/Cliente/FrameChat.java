@@ -48,6 +48,7 @@ class LabelCliente extends JPanel implements MessageReceiver {
 		campoMensaje.addActionListener(mensajeEvent);
 		
 		cliente = new Cliente(this);
+		cliente.start();
 		
 		add(botonEnviar);
 		add(campoMensaje);
@@ -55,7 +56,7 @@ class LabelCliente extends JPanel implements MessageReceiver {
 	}
 	
 	public void enNuevoMensaje(Mensaje mensaje) {
-		boxDeMensajes.append(mensaje.getNombre() + ": " + mensaje.getMensaje());
+		boxDeMensajes.append(mensaje.getNombre() + ": " + mensaje.getMensaje() + "\n");
 	}
 	
 	private class EnviarMensajeEvent implements ActionListener {
