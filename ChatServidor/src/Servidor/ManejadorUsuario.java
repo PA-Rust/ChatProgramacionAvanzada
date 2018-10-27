@@ -11,10 +11,17 @@ import General.Mensaje;
 public class ManejadorUsuario extends Thread {
 	private Socket usuario;
 	private Servidor server;
+	private ObjectOutputStream salida;
 	
 	public ManejadorUsuario(Socket usuario, Servidor server) {
 		this.usuario = usuario;
 		this.server = server;
+		
+		try {
+			salida = new ObjectOutputStream(usuario.getOutputStream());
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 	
 	@Override
@@ -42,6 +49,7 @@ public class ManejadorUsuario extends Thread {
 			System.out.println("Cerrando manejador");
 			try {
 				server.deregistrarManejador(this);
+				salida.close();
 				usuario.close();
 			} catch (IOException e) {
 				e.printStackTrace();
@@ -50,10 +58,6 @@ public class ManejadorUsuario extends Thread {
 	}
 	
 	public void enNuevoMensaje(Mensaje nuevoMensaje) throws IOException {
-		try(ObjectOutputStream salida = new ObjectOutputStream(usuario.getOutputStream())) {
-			salida.writeObject(nuevoMensaje);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+		salida.writeObject(nuevoMensaje);
 	}
 }
