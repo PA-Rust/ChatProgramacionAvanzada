@@ -10,8 +10,6 @@ import java.net.UnknownHostException;
 import General.Mensaje;
 
 public class Cliente extends Thread {
-	private final String ip = "localhost";
-	private final int puerto = 3000;
 	boolean connected = true;
 	ObjectInputStream entrada;
 	Socket server;
@@ -19,7 +17,7 @@ public class Cliente extends Thread {
 	
 	MessageReceiver receiver;
 	
-	public Cliente(MessageReceiver receiver) {
+	public Cliente(MessageReceiver receiver, String ip, int puerto) {
 		this.receiver = receiver;
 		try {
 			server = new Socket(ip, puerto);
@@ -58,19 +56,6 @@ public class Cliente extends Thread {
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
-		}
-	}
-	
-	/**
-	 * Called when the client app is killed.
-	 */
-	public void onClose() {
-		try {
-			mensaje.close();
-			entrada.close();
-			server.close();
-		} catch (IOException e) {
-			e.printStackTrace();
 		}
 	}
 	
