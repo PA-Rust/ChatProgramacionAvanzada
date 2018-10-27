@@ -25,7 +25,7 @@ public class Servidor {
 				manejadores.add(nuevoManejador);
 				System.out.println("nuevo cliente!");
 				nuevoManejador.start();
-				// nuevoMensaje(null, new Mensaje("Servidor", "NUEVO USUARIO CONECTADO"));
+				nuevoMensaje(null, new Mensaje("Servidor", "NUEVO USUARIO CONECTADO"));
 			}
 		} catch (IOException e) {
 			e.printStackTrace();
