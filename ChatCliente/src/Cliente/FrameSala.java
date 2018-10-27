@@ -140,7 +140,7 @@ public class FrameSala extends JFrame implements MessageReceiver {
 	public void enNuevoMensaje(Mensaje mensaje) {
 		try {
 			System.out.println(document.getText(0, document.getLength()));
-			kit.insertHTML(document, document.getLength(), "[<b>" + mensaje.getNombre() + ": </b>]" + mensaje.getMensaje(), 0, 0, null);
+			kit.insertHTML(document, document.getLength(), "[<b>" + mensaje.getNombre() + "</b>] " + mensaje.getMensaje(), 0, 0, null);
 			textChat.setDocument(document);
 		} catch (BadLocationException e) {
 			e.printStackTrace();
